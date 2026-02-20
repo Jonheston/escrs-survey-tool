@@ -3,6 +3,7 @@
 import TopicTabs from "../components/TopicTabs";
 import FiltersPanel from "../components/FiltersPanel";
 import OverlayBarChart from "../components/OverlayBarChart";
+import PasswordGate from "../components/PasswordGate";
 import { useEffect, useMemo, useRef, useState } from "react";
 
 
@@ -128,12 +129,17 @@ export default function Page() {
   }, [activeTopicId]);
 
   if (!config || !respondents || !activeTopic || !activeQuestion) {
-    return <div style={{ padding: 24 }}>Loading…</div>;
-    }
+    return (
+      <PasswordGate>
+        <div style={{ padding: 24 }}>Loading…</div>
+      </PasswordGate>
+    );
+  }
 
   const title = activeQuestion.prompt;
 
   return (
+    <PasswordGate>
     <div style={{ padding: 20, maxWidth: 1200, margin: "0 auto" }}>
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12 }}>
         <div>
@@ -297,5 +303,6 @@ export default function Page() {
         </div>
       </div>
     </div>
+    </PasswordGate>
   );
 }

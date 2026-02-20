@@ -1,0 +1,343 @@
+{
+    "version": "1.0",
+    "dataset": {
+      "id": "escrs_survey_2025",
+      "label": "ESCRS Clinical Trends Survey 2025",
+      "notes": "Blank responses are excluded from denominators. No 'No response' category is shown."
+    },
+    "filters": [
+      {
+        "id": "region",
+        "label": "Region",
+        "column": "region",
+        "type": "single_select",
+        "ui": { "order_mode": "custom",
+                "order": [
+                  "Western Europe",
+                  "Eastern Europe",
+                  "Africa & Middle East",
+                  "Asia Pacific",
+                  "North & South America",
+                  "Other"
+                ] }
+      },
+      {
+        "id": "practice_setting",
+        "label": "Surgery location",
+        "column": "Where is your primary surgery location?",
+        "type": "single_select",
+        "ui": { "order_mode": "custom",
+                "order": [
+                  "Private hospital",
+                  "Corporate-owned clinic",
+                  "Public hospital",
+                  "Hospital-owned clinic",
+                  "Academic institution or non-profit",
+                  "Retired or do not currently perform surgery",
+                  "Surgeon-owned clinic",
+                  "Other" 
+                ] }
+      },
+      {
+        "id": "years_in_practice",
+        "label": "Years in practice",
+        "column": "How many years have you been in practice post training?",
+        "type": "single_select",
+        "ui": {
+          "order_mode": "custom",
+          "order": [
+            "Currently in medical school or training",
+            "0–5 years",
+            "6–10 years",
+            "11–20 years",
+            "21-30 years",
+            "Over 30 years"
+          ]
+        }
+      },
+      {
+        "id": "escrs_member",
+        "label": "ESCRS member",
+        "column": "Are you an ESCRS delegate?",
+        "type": "single_select",
+        "ui": {
+          "order_mode": "custom",
+          "order": [
+            "All",
+            "Yes",
+            "No, but I plan to become a delegate in the next 12 months",
+            "No, and I have no plans to become a delegate"
+          ]
+        },
+        "values": {
+          "all_value": "All"
+        }
+      }
+    ],
+    "topics": [
+      {
+        "id": "phaco",
+        "label": "Phaco",
+        "short_label": "Phaco",
+        "question_set": [
+          {
+            "id": "q_phaco_default",
+            "is_default": true,
+            "type": "single_select",
+            "column": "Q_PHACO_DEFAULT",
+            "prompt": "What is your preferred method of breaking the nucleus during phacoemulsification?",
+            "response": {
+              "exclude_values": ["", null],
+              "order_mode": "custom",
+              "order": [
+                "Divide and conquer",
+                "Stop and chop",
+                "Horizontal chop",
+                "Vertical chop",
+                "Other"
+              ],
+              "label_overrides": {}
+            },
+            "chart": {
+              "kind": "bar_distribution",
+              "show_baseline_gray": true,
+              "overlay_filtered_color": true,
+              "show_n_on_bars": true,
+              "show_n_for": "filtered_only",
+              "hide_overlay_if_filtered_n_lt": 10,
+              "hide_overlay_note": "Filtered results hidden (n < 10). Baseline shown in gray."
+            }
+          }
+        ]
+      },
+      {
+        "id": "presbyopia",
+        "label": "Presbyopia",
+        "short_label": "Presbyopia",
+        "question_set": [
+          {
+            "id": "q_presbyopia_default",
+            "is_default": true,
+            "type": "single_select",
+            "column": "Q_PRESBYOPIA_DEFAULT",
+            "prompt": "What type of presbyopia-correcting/simultaneous vision IOL technology is used in the majority of your presbyopia patients?",
+            "response": {
+              "exclude_values": ["", null],
+              "order_mode": "custom",
+              "order": [
+                "Extended depth of focus IOLs",
+                "Trifocal IOLs",
+                "Enhanced Monofocal IOLs",
+                "Bifocal IOLs",
+                "Accommodating IOLs",
+                "Other"
+              ],
+              "label_overrides": {}
+            },
+            "chart": {
+              "kind": "bar_distribution",
+              "show_baseline_gray": true,
+              "overlay_filtered_color": true,
+              "show_n_on_bars": true,
+              "show_n_for": "filtered_only",
+              "hide_overlay_if_filtered_n_lt": 10,
+              "hide_overlay_note": "Filtered results hidden (n < 10). Baseline shown in gray."
+            }
+          }
+        ]
+      },
+      {
+        "id": "astigmatism",
+        "label": "Astigmatism",
+        "short_label": "Astigmatism",
+        "question_set": [
+          {
+            "id": "q_astigmatism_default",
+            "is_default": true,
+            "type": "single_select",
+            "column": "Q_ASTIGMATISM_DEFAULT",
+            "prompt": "How do you align the intended axis of placement for a toric IOL?",
+            "response": {
+              "exclude_values": ["", null],
+              "order_mode": "custom",
+              "order": [
+                "Intraoperative wavefront aberrometry",
+                "Digital image registration",
+                "Ink marking with the aid of manual axial instruments (i.e. RK or LRI marker, Mendez gauge, etc.)",
+                "Ink marking at the slit lamp with no additional instruments",
+                "Anatomical landmarks without preoperative marking"
+              ],
+              "label_overrides": {}
+            },
+            "chart": {
+              "kind": "bar_distribution",
+              "show_baseline_gray": true,
+              "overlay_filtered_color": true,
+              "show_n_on_bars": true,
+              "show_n_for": "filtered_only",
+              "hide_overlay_if_filtered_n_lt": 10,
+              "hide_overlay_note": "Filtered results hidden (n < 10). Baseline shown in gray."
+            }
+          }
+        ]
+      },
+      {
+        "id": "refractive_surgery",
+        "label": "Refractive Surgery",
+        "short_label": "Refractive",
+        "question_set": [
+          {
+            "id": "q_refractive_default",
+            "is_default": true,
+            "type": "single_select",
+            "column": "Q_REFRACTIVE_DEFAULT",
+            "prompt": "What category are the majority of your corneal refractive procedures CURRENTLY?",
+            "response": {
+              "exclude_values": ["", null],
+              "order_mode": "custom",
+              "order": [
+                "Standard ablations",
+                "Wavefront-optimized",
+                "Wavefront-customized",
+                "Topography-customized",
+                "Femtosecond intrastromal lenticule extraction",
+                "Other"
+              ],
+              "label_overrides": {}
+            },
+            "chart": {
+              "kind": "bar_distribution",
+              "show_baseline_gray": true,
+              "overlay_filtered_color": true,
+              "show_n_on_bars": true,
+              "show_n_for": "filtered_only",
+              "hide_overlay_if_filtered_n_lt": 10,
+              "hide_overlay_note": "Filtered results hidden (n < 10). Baseline shown in gray."
+            }
+          }
+        ]
+      },
+      {
+        "id": "ocular_surface",
+        "label": "Ocular Surface",
+        "short_label": "Ocular Surface",
+        "question_set": [
+          {
+            "id": "q_ocular_surface_default",
+            "is_default": true,
+            "type": "single_select",
+            "column": "Q_OCULARSURFACE_DEFAULT",
+            "prompt": "On average, how many dry eye patients do you see per month?",
+            "response": {
+              "exclude_values": ["", null],
+              "order_mode": "custom",
+              "order": [
+                "None",
+                "1-5",
+                "6-10",
+                "11-25",
+                "26-50",
+                "51-99",
+                "100 or more"
+              ],
+              "label_overrides": {}
+            },
+            "chart": {
+              "kind": "bar_distribution",
+              "show_baseline_gray": true,
+              "overlay_filtered_color": true,
+              "show_n_on_bars": true,
+              "show_n_for": "filtered_only",
+              "hide_overlay_if_filtered_n_lt": 10,
+              "hide_overlay_note": "Filtered results hidden (n < 10). Baseline shown in gray."
+            }
+          }
+        ]
+      },
+      {
+        "id": "glaucoma",
+        "label": "Glaucoma",
+        "short_label": "Glaucoma",
+        "question_set": [
+          {
+            "id": "q_glaucoma_default",
+            "is_default": true,
+            "type": "single_select",
+            "column": "Q_GLAUCOMA_DEFAULT",
+            "prompt": "When do you usually initiate surgical intervention for your glaucoma patients?",
+            "response": {
+              "exclude_values": ["", null],
+              "order_mode": "custom",
+              "order": [
+                "First line",
+                "After first-line medication",
+                "After two medications",
+                "After three medications",
+                "I do not perform surgical interventions"
+              ],
+              "label_overrides": {}
+            },
+            "chart": {
+              "kind": "bar_distribution",
+              "show_baseline_gray": true,
+              "overlay_filtered_color": true,
+              "show_n_on_bars": true,
+              "show_n_for": "filtered_only",
+              "hide_overlay_if_filtered_n_lt": 10,
+              "hide_overlay_note": "Filtered results hidden (n < 10). Baseline shown in gray."
+            }
+          }
+        ]
+      },
+      {
+        "id": "retina",
+        "label": "Retina",
+        "short_label": "Retina",
+        "question_set": [
+          {
+            "id": "q_retina_default",
+            "is_default": true,
+            "type": "single_select",
+            "column": "Q_RETINA_DEFAULT",
+            "prompt": "How many intravitreal injections do you perform monthly?",
+            "response": {
+              "exclude_values": ["", null],
+              "order_mode": "custom",
+              "order": [
+                "0",
+                "1-20",
+                "21-40",
+                "41-80",
+                "81-120",
+                "121-240",
+                "240-400",
+                "More than 400"
+              ],
+              "label_overrides": {}
+            },
+            "chart": {
+              "kind": "bar_distribution",
+              "show_baseline_gray": true,
+              "overlay_filtered_color": true,
+              "show_n_on_bars": true,
+              "show_n_for": "filtered_only",
+              "hide_overlay_if_filtered_n_lt": 10,
+              "hide_overlay_note": "Filtered results hidden (n < 10). Baseline shown in gray."
+            }
+          }
+        ]
+      }
+    ],
+    "ui_defaults": {
+      "active_topic_id": "phaco",
+      "active_question_id_by_topic": {
+        "phaco": "q_phaco_default",
+        "presbyopia": "q_presbyopia_default",
+        "astigmatism": "q_astigmatism_default",
+        "refractive_surgery": "q_refractive_default",
+        "ocular_surface": "q_ocular_surface_default",
+        "glaucoma": "q_glaucoma_default",
+        "retina": "q_retina_default"
+      }
+    }
+  }

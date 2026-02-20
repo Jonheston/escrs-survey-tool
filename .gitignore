@@ -1,0 +1,20 @@
+# Dependencies
+node_modules/
+
+# Next.js build output
+.next/
+out/
+
+# Debug logs
+npm-debug.log*
+
+# Local env files
+.env*.local
+
+# Misc
+.DS_Store
+*.pem
+.ipynb_checkpoints/
+
+# Zip files
+*.zip

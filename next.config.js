@@ -2,6 +2,8 @@
 const nextConfig = {
   output: 'export',
   trailingSlash: true,
+  basePath: process.env.NODE_ENV === 'production' ? '/escrs-survey-tool' : '',
+  assetPrefix: process.env.NODE_ENV === 'production' ? '/escrs-survey-tool/' : '',
   images: {
     unoptimized: true,
   },

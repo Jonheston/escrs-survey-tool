@@ -27,8 +27,9 @@ export default function Page() {
   // Load config + data
   useEffect(() => {
     (async () => {
-      const cfg = await loadConfig("/data/topic_config.json");
-      const rows = await loadRespondents("/data/respondents.min.json");
+      const basePath = process.env.NODE_ENV === 'production' ? '/escrs-survey-tool' : '';
+      const cfg = await loadConfig(`${basePath}/data/topic_config.json`);
+      const rows = await loadRespondents(`${basePath}/data/respondents.min.json`);
 
       // URL -> initial state, else config defaults
       const urlState = parseUrlState(window.location.search);

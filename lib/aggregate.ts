@@ -99,3 +99,22 @@ export function buildDistributions(args: {
 
   return { baseline, filtered };
 }
+
+export function calculateWeightedAverage(
+  distribution: DistRow[],
+  numericValues: Record<string, number>
+): number | null {
+  let totalWeight = 0;
+  let totalCount = 0;
+
+  for (const row of distribution) {
+    const numericValue = numericValues[row.key] ?? numericValues[row.label];
+    if (numericValue === undefined) continue;
+    
+    totalWeight += numericValue * row.count;
+    totalCount += row.count;
+  }
+
+  if (totalCount === 0) return null;
+  return totalWeight / totalCount;
+}

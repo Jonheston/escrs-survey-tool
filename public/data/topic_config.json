@@ -240,7 +240,16 @@
                 "51-99",
                 "100 or more"
               ],
-              "label_overrides": {}
+              "label_overrides": {},
+              "numeric_values": {
+                "None": 0,
+                "1-5": 3,
+                "6-10": 8,
+                "11-25": 18,
+                "26-50": 38,
+                "51-99": 75,
+                "100 or more": 125
+              }
             },
             "chart": {
               "kind": "bar_distribution",
@@ -249,7 +258,9 @@
               "show_n_on_bars": true,
               "show_n_for": "filtered_only",
               "hide_overlay_if_filtered_n_lt": 10,
-              "hide_overlay_note": "Filtered results hidden (n < 10). Baseline shown in gray."
+              "hide_overlay_note": "Filtered results hidden (n < 10). Baseline shown in gray.",
+              "show_average": true,
+              "average_label": "patients/month"
             }
           }
         ]
@@ -313,7 +324,17 @@
                 "240-400",
                 "More than 400"
               ],
-              "label_overrides": {}
+              "label_overrides": {},
+              "numeric_values": {
+                "0": 0,
+                "1-20": 10.5,
+                "21-40": 30.5,
+                "41-80": 60.5,
+                "81-120": 100.5,
+                "121-240": 180.5,
+                "240-400": 320,
+                "More than 400": 500
+              }
             },
             "chart": {
               "kind": "bar_distribution",
@@ -322,7 +343,9 @@
               "show_n_on_bars": true,
               "show_n_for": "filtered_only",
               "hide_overlay_if_filtered_n_lt": 10,
-              "hide_overlay_note": "Filtered results hidden (n < 10). Baseline shown in gray."
+              "hide_overlay_note": "Filtered results hidden (n < 10). Baseline shown in gray.",
+              "show_average": true,
+              "average_label": "injections/month"
             }
           }
         ]

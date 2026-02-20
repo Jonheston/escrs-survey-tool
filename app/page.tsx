@@ -8,7 +8,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 
 import { loadConfig } from "../lib/config";
 import { loadRespondents } from "../lib/data";
-import { applyFilters, buildDistributions } from "../lib/aggregate";
+import { applyFilters, buildDistributions, calculateWeightedAverage } from "../lib/aggregate";
 import { parseUrlState, toQueryString } from "../lib/urlState";
 import { exportChartPng } from "../lib/exportPng";
 
@@ -64,9 +64,9 @@ export default function Page() {
     return activeTopic.question_set.find(q => q.is_default) ?? activeTopic.question_set[0] ?? null;
   }, [activeTopic]);
 
-  const { baseline, filtered, filteredTotalN, overlayHidden } = useMemo(() => {
+  const { baseline, filtered, filteredTotalN, overlayHidden, baselineAvg, filteredAvg } = useMemo(() => {
     if (!config || !respondents || !activeQuestion) {
-      return { baseline: [], filtered: [], filteredTotalN: 0, overlayHidden: false };
+      return { baseline: [], filtered: [], filteredTotalN: 0, overlayHidden: false, baselineAvg: null, filteredAvg: null };
     }
 
     // Baseline set: anyone with a non-blank answer for the active question
@@ -92,11 +92,23 @@ export default function Page() {
     const hideThreshold = activeQuestion.chart?.hide_overlay_if_filtered_n_lt ?? 10;
     const shouldHide = filteredRows.length < hideThreshold;
 
+    // Calculate averages if numeric_values is defined
+    const numericValues = activeQuestion.response?.numeric_values;
+    let baselineAvgVal: number | null = null;
+    let filteredAvgVal: number | null = null;
+    
+    if (numericValues) {
+      baselineAvgVal = calculateWeightedAverage(dists.baseline, numericValues);
+      filteredAvgVal = calculateWeightedAverage(dists.filtered, numericValues);
+    }
+
     return {
       baseline: dists.baseline,
       filtered: dists.filtered,
       filteredTotalN: filteredRows.length,
-      overlayHidden: shouldHide
+      overlayHidden: shouldHide,
+      baselineAvg: baselineAvgVal,
+      filteredAvg: filteredAvgVal
     };
   }, [config, respondents, activeQuestion, filters]);
 
@@ -229,6 +241,55 @@ export default function Page() {
               showNOnBars={true}
             />
           </div>
+
+          {activeQuestion.chart?.show_average && baselineAvg !== null && (
+            <div style={{ 
+              marginTop: 16, 
+              display: "flex", 
+              gap: 16,
+              justifyContent: "center"
+            }}>
+              <div style={{ 
+                padding: "12px 20px", 
+                borderRadius: 12, 
+                background: "#f3f4f6",
+                border: "1px solid #d1d5db",
+                textAlign: "center",
+                minWidth: 140
+              }}>
+                <div style={{ fontSize: 11, color: "#666", fontWeight: 600, textTransform: "uppercase", letterSpacing: 0.5 }}>
+                  Baseline Avg
+                </div>
+                <div style={{ fontSize: 24, fontWeight: 800, color: "#374151", marginTop: 4 }}>
+                  {baselineAvg.toFixed(1)}
+                </div>
+                <div style={{ fontSize: 11, color: "#666" }}>
+                  {activeQuestion.chart?.average_label ?? ""}
+                </div>
+              </div>
+
+              {!overlayHidden && filteredAvg !== null && (
+                <div style={{ 
+                  padding: "12px 20px", 
+                  borderRadius: 12, 
+                  background: `${accent}15`,
+                  border: `2px solid ${accent}`,
+                  textAlign: "center",
+                  minWidth: 140
+                }}>
+                  <div style={{ fontSize: 11, color: accent, fontWeight: 600, textTransform: "uppercase", letterSpacing: 0.5 }}>
+                    Filtered Avg
+                  </div>
+                  <div style={{ fontSize: 24, fontWeight: 800, color: accent, marginTop: 4 }}>
+                    {filteredAvg.toFixed(1)}
+                  </div>
+                  <div style={{ fontSize: 11, color: "#666" }}>
+                    {activeQuestion.chart?.average_label ?? ""}
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
 
           <div style={{ marginTop: 10, fontSize: 12, color: "#666" }}>
             Gray bars show overall distribution (baseline). Colored overlay shows filtered distribution. Counts shown above colored bars only.

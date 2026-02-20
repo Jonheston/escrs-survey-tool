@@ -18,6 +18,7 @@ export type FilterDef = {
       order_mode?: "alpha" | "custom";
       order?: string[];
       label_overrides?: Record<string, string>;
+      numeric_values?: Record<string, number>;
     };
     chart?: {
       kind: "bar_distribution";
@@ -27,6 +28,8 @@ export type FilterDef = {
       show_n_for?: "filtered_only" | "both";
       hide_overlay_if_filtered_n_lt?: number;
       hide_overlay_note?: string;
+      show_average?: boolean;
+      average_label?: string;
     };
   };
   
